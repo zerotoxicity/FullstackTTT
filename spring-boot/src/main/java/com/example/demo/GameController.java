@@ -2,18 +2,13 @@ package com.example.demo;
 
 import com.example.demo.entity.Game;
 import com.example.demo.entity.Gameplay;
-import com.example.demo.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+// REST API controller
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
@@ -49,6 +44,7 @@ public class GameController {
     //Make a move in the game with id
     @PutMapping("/games/{id}")
     public ResponseEntity<Game> putGame(@PathVariable String id, @RequestBody Gameplay gameplay) throws Exception {
+        //Send message to websocket's /topic/lobby 
         template.convertAndSend("/topic/lobby",id+"@Update");
         return ResponseEntity.ok(gameService.gameplay(gameplay,id));
     }
@@ -57,6 +53,7 @@ public class GameController {
     @PutMapping("/games/{id}/{playerTwoId}")
     public ResponseEntity<?> putGamePlayerTwo(@PathVariable String id, @PathVariable String playerTwoId) throws Exception {
          ResponseEntity re= gameService.connectToGame(playerTwoId, id);
+         //Send message to websocket's /topic/lobby 
         template.convertAndSend("/topic/lobby",id+"@New player");
         return re;
     }

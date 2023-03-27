@@ -15,11 +15,10 @@ const Game = () => {
     setGame(location.data);
     setPlayer(location.player);
   }
-
+  //2@NEWPLAYER
   useSubscription(`/topic/lobby`, message => {
     const id = message.body.split('@')[0];
     if (game && game.gameId == id) {
-      console.log(message.body);
       fetch(BACKEND_URL + 'games/' + id)
         .then(async response => await response.json())
         .then(data => {

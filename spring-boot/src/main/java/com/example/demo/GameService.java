@@ -7,7 +7,6 @@ import com.example.demo.enums.Status;
 import com.example.demo.storage.GamesContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,41 +23,46 @@ public class GameService {
     public GameService(GameRepo gameRepo) {
         this.gameRepo = gameRepo;
     }
-
+    // Retrieve all games
     public List<Game> getGame(){
         return gameRepo.findAll();
     }
-
+    // Find game with gameId
     public Game getGame(String gameId) throws Exception {
        return gameRepo.findById(gameId).orElseThrow();
     }
-
+    // Create new game and save it to db
     public Game newGame(String player){
         Game game = new Game(new int[3][3],player);
-//        GamesContainer.getInstance().setGames(game);
         gameRepo.save(game);
         return game;
     }
 
+    // Connect Player2 to the game with gameId
     public ResponseEntity<?> connectToGame(String player2, String gameId) throws Exception {
-
         Game game = gameRepo.findById(gameId).orElseThrow();
+        //Throw error if the game is full
         if(game.getPlayer2()!=null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Game is full!");
         }
+        // Throw error if Player 2 is using the same name as Player 1
         if(game.getPlayer1().equals(player2)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Name is taken");
         }
         game.setPlayer2(player2);
         game.setStatus(Status.STARTED);
+        // Use random function to determine who goes first
         Random rn = new Random();
         int startingPlayer = rn.nextInt(1+1);
         String nextPlayer = startingPlayer == 0 ? game.getPlayer1() : player2;
         game.setPlayerTurn(nextPlayer);
+        //Update the entity
         gameRepo.save(game);
         return ResponseEntity.ok(game);
     }
-
+    // Make a move on current gameplay
+    // Gameplay refers to the move made by the player
+    // ID - Game ID
     public Game gameplay(Gameplay gameplay, String id) throws Exception {
         boolean completed = false;
         Game game = gameRepo.findById(id).orElseThrow();
@@ -92,6 +96,7 @@ public class GameService {
         return game;
     }
 
+//  Check game state for winner
     private boolean checkWinner(int[][] board, int pieceVal){
         //Check vertical/horizontal wins
         for(int i=0; i<3;i++){

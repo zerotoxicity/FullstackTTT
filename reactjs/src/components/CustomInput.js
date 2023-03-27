@@ -8,10 +8,12 @@ const CustomInput = ({ setter, placeholder, required = false }) => {
   const textColor = TEXT_COLOR;
 
   return (
-    <label>
-      <Text as="b" {...textColor}>
-        {placeholder}
-      </Text>
+    <>
+      <label for {...placeholder}>
+        <Text as="b" {...textColor}>
+          {placeholder}
+        </Text>
+      </label>
       <Input
         onChange={changeHandler}
         placeholder={placeholder}
@@ -21,7 +23,7 @@ const CustomInput = ({ setter, placeholder, required = false }) => {
         size="lg"
         isRequired={required}
       />
-    </label>
+    </>
   );
 };
 

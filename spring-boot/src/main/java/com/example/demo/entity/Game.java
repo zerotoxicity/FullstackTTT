@@ -10,6 +10,7 @@ import org.hibernate.type.descriptor.java.IntegerPrimitiveArrayJavaType;
 
 import java.util.Arrays;
 
+// Entity of the Tic-Tac-Toe to be stored in Database
 @Entity
 @Table(name="game")
 public class Game {

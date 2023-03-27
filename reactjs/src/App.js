@@ -10,14 +10,18 @@ import { WEBSOCKET_URL } from './constants';
 
 function App() {
   return (
+    // Connect to websocket
     <StompSessionProvider url={WEBSOCKET_URL}>
       <ChakraProvider theme={theme}>
         <header>
           <Navbar />
         </header>
+
         <main>
           <Routes>
+            {/* Dashboard */}
             <Route exact path="/" element={<Home />} />
+            {/* /game consist of game webpage */}
             <Route exact path="/game" element={<Game />} />
           </Routes>
         </main>

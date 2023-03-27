@@ -6,7 +6,7 @@ A Tic-tac-toe application that allows 2 players to play against each other.
 
 Built using ReactJS, Spring Boot, and Postgres.
 
-- [Design consideraations](#design-considerations)
+- [Design considerations](#design-considerations)
   - [Accessibility considerations](#accessibility-considerations)
   - [Architecture considerations](#architecture-considerations)
 - [Architecture Implementation](#architecture-implementation)
@@ -34,9 +34,9 @@ In the case of an error, users will be provided with both text displaying the er
 
 #### Architecture considerations
 
-To simplify installation, the application has been containerized using Docker. Which allows for easy installation of the application in different environments.
+The application has been containerized using Docker to simplify the installation process, making it easy to install the application in different environments.
 
-To allow multiplayer gameplay, Websocket has been implemented to inform clients to update their game to its latest state.
+Additionally, to facilitate multiplayer gameplay, Websocket has been implemented to notify clients of the latest game updates and keep their game states up-to-date.
 <br /><br />
 
 #### Assumptions
@@ -74,9 +74,7 @@ Players can access the website on localhost port 3000.
 1. Clone this repository
 
 ```
-git clone https://gitfront.io/r/user-7911234/utZTDuQjoXoo/AET-swe_AngHaoJun.git
-or
-git clone https://github.com/zerotoxicity/gTechAT.git
+git clone https://github.com/zerotoxicity/FullstackTTT.git
 ```
 
 ### Usage
@@ -153,19 +151,4 @@ Player **hi** makes a move in game 4 - `PUT http://localhost:8080/api/games/4`
 
 [![Interacting with keyboard or mouse](doc/videos/KeyMouse.mp4)](https://user-images.githubusercontent.com/31730313/223983933-2927b5b2-f564-44c3-bf57-94a3f990eb0e.mp4)
 
-Previous video shows player **Keyboard** uses only keyboard to interact with app, while player **Mouse** interacts using a mouse.
-
 <br /> <br /> <br />
-
-[![Interacting with screen reader](doc/videos/voice.mp4)](https://user-images.githubusercontent.com/31730313/223982260-b4361794-60c5-4721-9ba0-7983159122a2.mp4)
-
-The previous video shows the interaction of the application with a screen reader
-<br /> <br /> <br /> <br />
-
-![Screenshot of the app in portrait mode](doc/images/mobileP.png)
-<br />
-Screenshot of the application in portrait mode
-<br /> <br /> <br /> <br />
-
-![Screenshot of the app in landscape mode](doc/images/mobileL.png)
-Screenshot of the application in landscape mode

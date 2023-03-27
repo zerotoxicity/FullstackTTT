@@ -1,9 +1,7 @@
 package com.example.demo.entity;
-
-import com.example.demo.enums.Piece;
-
+// Object required for user to submit in order to make a move
 public class Gameplay {
-    private Integer coordX;
+    private Integer coordX; 
     private Integer coordY;
     private String playerId;
 
@@ -15,8 +13,6 @@ public class Gameplay {
     public void setPlayerId(String playerId) {
         this.playerId = playerId;
     }
-
-
 
     public Integer getCoordX() {
         return coordX;

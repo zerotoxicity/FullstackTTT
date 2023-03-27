@@ -11,6 +11,7 @@ import { checkJson } from '../helperFunctions';
 const FormComponentButtons = ({ gameId, playerName, setError }) => {
   const navigate = useNavigate();
 
+  // API request based on which button is pressed
   const fetchFunction = async join => {
     const reqBody = join ? JOIN_GAME_BODY : NEW_GAME_BODY;
     const id = join ? gameId + '/' : '';
@@ -24,6 +25,7 @@ const FormComponentButtons = ({ gameId, playerName, setError }) => {
         if (!response.ok) {
           return Promise.reject(error);
         }
+        // Switch to game board if the inputs are valid
         navigate('/game', { state: { data: data, player: playerName } });
       })
       .catch(error => {
@@ -36,7 +38,7 @@ const FormComponentButtons = ({ gameId, playerName, setError }) => {
     await fetchFunction(false);
   };
 
-  const onJoinGameClick = async gameId => {
+  const onJoinGameClick = async () => {
     await fetchFunction(true);
   };
 
